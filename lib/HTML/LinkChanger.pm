@@ -4,6 +4,7 @@ use strict;
 use vars qw($VERSION @ISA @EXPORT @EXPORT_OK);
 
 require Exporter;
+require AutoLoader;
 
 @ISA = qw(Exporter AutoLoader HTML::Parser);
 # Items to export into callers namespace by default. Note: do not export
@@ -12,7 +13,7 @@ require Exporter;
 @EXPORT = qw(
 	
 );
-$VERSION = sprintf("%d.%d", q$Revision: 1.5 $ =~ /(\d+)\.(\d+)/);
+$VERSION = sprintf("%d.%d", q$Revision: 1.6 $ =~ /(\d+)\.(\d+)/);
 
 # Preloaded methods go here.
 

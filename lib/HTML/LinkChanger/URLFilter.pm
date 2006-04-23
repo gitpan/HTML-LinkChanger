@@ -4,6 +4,7 @@ use strict;
 use vars qw($VERSION @ISA @EXPORT @EXPORT_OK);
 
 require Exporter;
+require AutoLoader;
 
 @ISA = qw(Exporter AutoLoader);
 # Items to export into callers namespace by default. Note: do not export
@@ -12,7 +13,7 @@ require Exporter;
 @EXPORT = qw(
 	
 );
-$VERSION = sprintf("%d.%d", q$Revision: 1.2 $ =~ /(\d+)\.(\d+)/);
+$VERSION = sprintf("%d.%d", q$Revision: 1.3 $ =~ /(\d+)\.(\d+)/);
 
 # Preloaded methods go here.
 
