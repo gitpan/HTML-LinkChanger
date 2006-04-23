@@ -12,7 +12,7 @@ require Exporter;
 @EXPORT = qw(
 	
 );
-$VERSION = sprintf("%d.%d", q$Revision: 1.3 $ =~ /(\d+)\.(\d+)/);
+$VERSION = sprintf("%d.%d", q$Revision: 1.5 $ =~ /(\d+)\.(\d+)/);
 
 # Preloaded methods go here.
 
@@ -23,13 +23,37 @@ require HTML::Tagset;
 
 sub new
 {
-	my($class, $base) = @_;
+	my $class = shift;
+	my %args = @_;
+
+	my $url_filters = $args{'url_filters'};		# reference to array HTML::LinkChanger::URLFilter objects
+							# or reference to one such object
 
 	my $self = $class->SUPER::new(
 		api_version => 3,
 		default_h => [sub { my $self = shift; $self->{_filtered_html} .= shift }, 'self,text'],
 		start_h => ['link_tag_start', 'self,tagname,text,attr,attrseq'],
 	);
+
+	# initializing transforming functions array
+	if (ref($url_filters) eq 'ARRAY')
+	{
+		foreach (@{$url_filters})
+		{
+			die "Array must contain only HTML::LinkChanger::URLFilter objects"
+				unless UNIVERSAL::isa($_, 'HTML::LinkChanger::URLFilter');
+		}
+
+		$self->{url_filters} = $url_filters;
+	}
+	elsif (UNIVERSAL::isa($url_filters, 'HTML::LinkChanger::URLFilter'))
+	{
+		$self->{url_filters} = [$url_filters];
+	}
+	else
+	{
+		$self->{url_filters} = []; # empty array - can add more filters later
+	}
 
 	$self;
 }
@@ -47,7 +71,11 @@ sub link_tag_start
 		for my $link_attr (@$link_attrs)
 		{
 			next unless exists $attr->{$link_attr};
-			$attr->{$link_attr} = $self->change_url($attr->{$link_attr});
+			$attr->{$link_attr} = $self->change_url(
+							$attr->{$link_attr},
+							$tag,
+							$link_attr
+						);
 		}
 
 		my $output='<'.$tag;
@@ -94,7 +122,18 @@ sub filtered_html
 sub change_url
 {
 	my $self = shift;
-	my $url = shift;
+	my $url = shift;	# url of the link
+	my $tag = shift;	# tag containing a link to change
+	my $attr = shift;	# attribute containing a link to change
+
+	foreach my $filter (@{$self->{url_filters}})
+	{
+		$url = $filter->url_filter(
+				url => $url,
+				tag => $tag,
+				attr => $attr
+			);
+	}
 
 	return $url;	# abstract class just keeps everything as it is
 }
