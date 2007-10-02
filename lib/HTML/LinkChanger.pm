@@ -13,7 +13,7 @@ require AutoLoader;
 @EXPORT = qw(
 	
 );
-$VERSION = sprintf("%d.%d", q$Revision: 1.6 $ =~ /(\d+)\.(\d+)/);
+$VERSION = sprintf("%d.%d", q$Revision: 1.7 $ =~ /(\d+)\.(\d+)/);
 
 # Preloaded methods go here.
 
@@ -100,6 +100,7 @@ sub filter
 
 	delete $self->{_filtered_html};
 	$self->parse(@_);
+	$self->eof;
 
 	return $self->{_filtered_html};
 }
@@ -110,6 +111,7 @@ sub filter_file
 
 	delete $self->{_filtered_html};
 	$self->parse_file(@_);
+	$self->eof;
 
 	return $self->{_filtered_html};
 }
