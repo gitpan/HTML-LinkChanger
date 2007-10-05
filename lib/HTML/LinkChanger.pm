@@ -1,5 +1,7 @@
 package HTML::LinkChanger;
 
+# Version: $Id: LinkChanger.pm 4 2007-10-05 15:51:37Z sergey.chernyshev $
+
 use strict;
 use vars qw($VERSION @ISA @EXPORT @EXPORT_OK);
 
@@ -13,7 +15,7 @@ require AutoLoader;
 @EXPORT = qw(
 	
 );
-$VERSION = sprintf("%d.%d", q$Revision: 1.7 $ =~ /(\d+)\.(\d+)/);
+$VERSION = sprintf("2.%d", q$Rev: 4 $ =~ /(\d+)/);
 
 # Preloaded methods go here.
 

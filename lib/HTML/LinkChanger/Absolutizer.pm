@@ -1,5 +1,7 @@
 package HTML::LinkChanger::Absolutizer;
 
+# Version: $Id: Absolutizer.pm 4 2007-10-05 15:51:37Z sergey.chernyshev $
+
 use strict;
 use vars qw($VERSION @ISA @EXPORT @EXPORT_OK);
 
@@ -15,7 +17,7 @@ require HTML::LinkChanger;
 @EXPORT = qw(
 	
 );
-$VERSION = sprintf("%d.%d", q$Revision: 1.4 $ =~ /(\d+)\.(\d+)/);
+$VERSION = sprintf("2.%d", q$Rev: 4 $ =~ /(\d+)/);
 
 # Preloaded methods go here.
 

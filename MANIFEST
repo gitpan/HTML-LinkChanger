@@ -6,3 +6,4 @@ MANIFEST			This list of files
 META.yml			Module meta-data (added by MakeMaker)
 t/absolutizer.t
 t/empty_changer.t
+t/last_token.t

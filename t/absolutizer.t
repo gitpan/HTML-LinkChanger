@@ -1,6 +1,6 @@
 #!/usr/local/bin/perl -w
 
-# Version: $Id: absolutizer.t,v 1.1 2006/04/23 04:03:53 drouk Exp $
+# Version: $Id: absolutizer.t 3 2007-10-05 15:49:42Z sergey.chernyshev $
 
 use strict;
 use Test;
